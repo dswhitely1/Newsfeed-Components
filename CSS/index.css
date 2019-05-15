@@ -104,6 +104,10 @@
 .article-open {
   height: 400px;
 }
+.form {
+  display: flex;
+  justify-content: center;
+}
 html,
 body {
   margin: 0;

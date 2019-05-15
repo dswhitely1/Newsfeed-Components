@@ -15,6 +15,7 @@ class Article {
 
 	expandArticle() {
 		// Using our reference to the domElement, toggle a class to expand or hide the article.
+		this.domElement.style.transition = 'height, 1s';
 		this.domElement.classList.toggle('article-open');
 		this.expandButton.textContent === 'Click to Expand'
 			? (this.expandButton.textContent = 'Click to Close')
@@ -35,4 +36,22 @@ let articles = document.querySelectorAll('.article');
 
 articles.forEach(article => {
 	return new Article(article);
+});
+
+const formTitle = document.querySelector('input');
+const formContent = document.querySelector('textarea');
+
+[ formTitle, formContent ].forEach(element =>
+	element.addEventListener('change', e => {
+		// console.log(e.target);
+	}),
+);
+
+const submitButton = document.querySelector('form button');
+submitButton.addEventListener('click', e => {
+	e.preventDefault();
+	let heading = formTitle.value;
+	let content = formContent.value;
+	console.log(heading, content);
+	console.log(content.split('\n'));
 });
