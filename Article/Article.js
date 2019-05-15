@@ -49,9 +49,33 @@ const formContent = document.querySelector('textarea');
 
 const submitButton = document.querySelector('form button');
 submitButton.addEventListener('click', e => {
-	e.preventDefault();
+	const options = { year: 'numeric', month: 'long', day: 'numeric' };
 	let heading = formTitle.value;
 	let content = formContent.value;
-	console.log(heading, content);
-	console.log(content.split('\n'));
+	const pArray = content.split('\n').filter(paragraph => paragraph !== '');
+	const newArticle = document.createElement('div');
+	newArticle.setAttribute('class', 'article');
+	const newH2 = document.createElement('h2');
+	newH2.textContent = heading;
+	newArticle.appendChild(newH2);
+	const newDate = document.createElement('p');
+	const event = new Date();
+	newDate.textContent = event.toLocaleDateString('es-ES', options);
+	newDate.setAttribute('class', 'date');
+	newArticle.appendChild(newDate);
+	let newP;
+	pArray.forEach(paragraph => {
+		newP = document.createElement('p');
+		newP.textContent = paragraph;
+		newArticle.appendChild(newP);
+	});
+	const newButton = document.createElement('span');
+	newButton.setAttribute('class', 'expandButton');
+	newArticle.appendChild(newButton);
+	const articleChildren = document.querySelector('.articles');
+	articleChildren.appendChild(newArticle);
+	console.log(newArticle);
+	new Article(newArticle);
+	formTitle.value = '';
+	formContent.value = '';
 });
